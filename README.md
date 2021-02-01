@@ -2,6 +2,10 @@
 
 Ruby wrapper for [MRML](https://github.com/jdrouet/mrml), the [MJML](https://mjml.io) parser implementation in Rust. Rust must be available on your system to install this gem.
 
+[![Gem Version](https://badge.fury.io/rb/mrml.svg)](https://badge.fury.io/rb/mrml)
+[![Build Status](https://travis-ci.org/hardpixel/mrml-ruby.svg?branch=master)](https://travis-ci.org/hardpixel/mrml-ruby)
+[![Maintainability](https://api.codeclimate.com/v1/badges/7e307214d3c2e4d2056d/maintainability)](https://codeclimate.com/github/hardpixel/mrml-ruby/maintainability)
+
 ## Installation
 
 Add this line to your application's Gemfile:
