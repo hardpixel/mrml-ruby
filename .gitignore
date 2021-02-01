@@ -1,0 +1,17 @@
+/.bundle/
+/.yardoc
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+Gemfile.lock
+
+# Added by cargo
+
+/target
+Cargo.lock
+
+/lib/*.so
+/mkmf.log
