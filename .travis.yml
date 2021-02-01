@@ -3,4 +3,11 @@ language: ruby
 cache: bundler
 rvm:
   - 2.7.2
-before_install: gem install bundler -v 2.1.4
+env:
+  global:
+    - RUST_VERSION=stable
+before_install:
+  - if [ ! -e "$HOME/.cargo/bin" ]; then curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain $RUST_VERSION -y; fi
+  - export PATH="$HOME/.cargo/bin:$PATH"
+  - rustup default $RUST_VERSION
+  - gem install bundler -v 2.1.4
