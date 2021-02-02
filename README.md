@@ -1,6 +1,6 @@
 # MRML Ruby
 
-Ruby wrapper for [MRML](https://github.com/jdrouet/mrml), the [MJML](https://mjml.io) parser implementation in Rust. Rust must be available on your system to install this gem.
+Ruby wrapper for [MRML](https://github.com/jdrouet/mrml), the [MJML](https://mjml.io) markup language implementation in Rust. Rust must be available on your system to install this gem.
 
 [![Gem Version](https://badge.fury.io/rb/mrml.svg)](https://badge.fury.io/rb/mrml)
 [![Build Status](https://travis-ci.org/hardpixel/mrml-ruby.svg?branch=master)](https://travis-ci.org/hardpixel/mrml-ruby)
@@ -31,6 +31,7 @@ template = <<-HTML
 <mjml>
   <mj-head>
     <mj-title>Newsletter Title</mj-title>
+    <mj-preview>Newsletter Preview</mj-preview>
   </mj-head>
   <mj-body>
     <mj-section>
@@ -51,10 +52,6 @@ MRML.to_preview(template)
 # Generate the html from mjml
 MRML.to_html(template)
 ```
-
-## To Do
-
-Add support for options.
 
 ## Development
 
