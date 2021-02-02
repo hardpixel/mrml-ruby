@@ -1,0 +1,13 @@
+<mjml>
+  <mj-head>
+    <mj-title>Newsletter Title</mj-title>
+    <mj-preview>Newsletter Preview</mj-preview>
+  </mj-head>
+  <mj-body>
+    <mj-section>
+      <mj-column>
+        <mj-text font-size="20px" color="#F45E43" font-family="helvetica">Hello World</mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>
