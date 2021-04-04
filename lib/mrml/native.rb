@@ -1,5 +1,5 @@
 module MRML
-  module Binding
+  module Native
     extend FFI::Library
 
     LIBNAME = "mrml.#{FFI::Platform::LIBSUFFIX}".freeze
