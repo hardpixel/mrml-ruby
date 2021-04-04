@@ -1,4 +1,5 @@
 require 'ffi'
+require 'mrml/result'
 require 'mrml/binding'
 require 'mrml/error'
 require 'mrml/version'
@@ -23,6 +24,8 @@ module MRML
       return if template.nil?
 
       result = Binding.send(method, template)
+      result = result.read_string.force_encoding('UTF-8')
+
       raise Error, result if result.start_with?('Error')
 
       result

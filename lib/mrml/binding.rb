@@ -7,8 +7,9 @@ module MRML
 
     ffi_lib File.expand_path(LIBNAME, LIBPATH)
 
-    attach_function :to_title, :to_title, [:string], :string
-    attach_function :to_preview, :to_preview, [:string], :string
-    attach_function :to_html, :to_html, [:string], :string
+    attach_function :to_title, :to_title, [:string], Result
+    attach_function :to_preview, :to_preview, [:string], Result
+    attach_function :to_html, :to_html, [:string], Result
+    attach_function :free, :free_result, [Result], :void
   end
 end
