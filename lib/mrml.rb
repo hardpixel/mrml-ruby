@@ -26,7 +26,7 @@ module MRML
       result = Native.send(method, template)
       result = result.read_string.force_encoding('UTF-8')
 
-      raise Error, result if result.start_with?('Error')
+      raise Error, result if result.start_with?(Error.name)
 
       result
     end
