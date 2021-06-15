@@ -11,7 +11,7 @@ fn to_char(string: String) -> *mut c_char {
   CString::new(string).unwrap().into_raw()
 }
 
-fn to_result(result: Result<String, mrml::Error>) -> *mut c_char {
+fn parse_result(result: Result<String, mrml::prelude::render::Error>) -> *mut c_char {
   if result.is_err() {
     to_char(format!("MRML::Error {:?}", result.unwrap_err()))
   } else {
@@ -19,19 +19,42 @@ fn to_result(result: Result<String, mrml::Error>) -> *mut c_char {
   }
 }
 
+fn parse_option(option: Option<String>) -> *mut c_char {
+  to_char(option.unwrap_or("".to_string()))
+}
+
 #[no_mangle]
 pub extern "C" fn to_title(input: *const c_char) -> *mut c_char {
-  to_result(mrml::to_title(&to_string(input), mrml::Options::default()))
+  let root = mrml::parse(&to_string(input));
+
+  if root.is_err() {
+    to_char(format!("MRML::Error {:?}", root.unwrap_err()))
+  } else {
+    parse_option(root.unwrap().get_title())
+  }
 }
 
 #[no_mangle]
 pub extern "C" fn to_preview(input: *const c_char) -> *mut c_char {
-  to_result(mrml::to_preview(&to_string(input), mrml::Options::default()))
+  let root = mrml::parse(&to_string(input));
+
+  if root.is_err() {
+    to_char(format!("MRML::Error {:?}", root.unwrap_err()))
+  } else {
+    parse_option(root.unwrap().get_preview())
+  }
 }
 
 #[no_mangle]
 pub extern "C" fn to_html(input: *const c_char) -> *mut c_char {
-  to_result(mrml::to_html(&to_string(input), mrml::Options::default()))
+  let root = mrml::parse(&to_string(input));
+  let opts = mrml::prelude::render::Options::default();
+
+  if root.is_err() {
+    to_char(format!("MRML::Error {:?}", root.unwrap_err()))
+  } else {
+    parse_result(root.unwrap().render(&opts))
+  }
 }
 
 #[no_mangle]
