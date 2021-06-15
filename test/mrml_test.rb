@@ -21,7 +21,7 @@ class MrmlTest < Minitest::Test
     result = ::MRML.to_html(valid_template)
 
     refute result.match?(%r{</?mj.+?>})
-    assert result.match?(/<body>/)
+    assert result.match?(%r{</?body>})
     assert result.match?('Hello World')
   end
 
