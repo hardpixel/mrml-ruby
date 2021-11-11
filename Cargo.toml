@@ -6,7 +6,7 @@ edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [dependencies]
-mrml = "1.2.4"
+mrml = "1.2.6"
 serde = { version = "1.0", features = ["derive"] }
 
 [lib]
