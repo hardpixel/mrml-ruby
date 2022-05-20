@@ -1,0 +1,34 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+
+require 'benchmark/ips'
+require 'benchmark/memory'
+
+require 'mrml'
+
+require 'rails/all'
+require 'mjml-rails'
+
+TEMPLATE = File.read File.join(__dir__, '..', 'samples/valid.mjml')
+
+reports = lambda do |x|
+  x.report('mrml') do
+    MRML.to_html(TEMPLATE)
+  end
+
+  x.report('mjml') do
+    parser = Mjml::Parser.new(TEMPLATE)
+    parser.render
+  end
+end
+
+Benchmark.ips do |x|
+  reports.call(x)
+  x.compare!
+end
+
+Benchmark.memory do |x|
+  reports.call(x)
+  x.compare!
+end
