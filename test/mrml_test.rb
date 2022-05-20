@@ -1,8 +1,6 @@
 require 'test_helper'
 
 class MrmlTest < Minitest::Test
-  TPL_PATH = File.expand_path('templates', __dir__)
-
   def test_that_it_has_a_version_number
     refute_nil ::MRML::VERSION
   end
@@ -34,10 +32,10 @@ class MrmlTest < Minitest::Test
   private
 
   def valid_template
-    @valid_template ||= File.read(File.join(TPL_PATH, 'valid.mjml'))
+    @valid_template ||= File.read File.join(__dir__, '..', 'samples/valid.mjml')
   end
 
   def invalid_template
-    @invalid_template ||= File.read(File.join(TPL_PATH, 'invalid.mjml'))
+    @invalid_template ||= File.read File.join(__dir__, '..', 'samples/invalid.mjml')
   end
 end
