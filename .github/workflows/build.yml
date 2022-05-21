@@ -1,0 +1,48 @@
+---
+name: Build
+
+on:
+  push:
+    branches: [master]
+    paths-ignore:
+      - 'README.md'
+      - 'LICENSE.txt'
+      - 'bin/**'
+      - 'samples/**'
+  pull_request:
+    branches: [master]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        ruby: ['2.7']
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+
+      - name: Run tests
+        run: |
+          bundle exec rake thermite:build
+          bundle exec rake test
+
+      - name: Package it
+        run: |
+          bundle exec rake thermite:tarball
+          bundle exec rake install
