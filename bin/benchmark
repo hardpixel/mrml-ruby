@@ -1,14 +1,16 @@
 #!/usr/bin/env ruby
 
-require 'bundler/setup'
+require 'bundler/inline'
 
-require 'benchmark/ips'
-require 'benchmark/memory'
+gemfile true, quiet: true do
+  source 'https://rubygems.org'
+  gemspec
 
-require 'mrml'
-
-require 'rails/all'
-require 'mjml-rails'
+  gem 'benchmark-ips'
+  gem 'benchmark-memory'
+  gem 'rails'
+  gem 'mjml-rails'
+end
 
 TEMPLATE = File.read File.join(__dir__, '..', 'samples/valid.mjml')
 
