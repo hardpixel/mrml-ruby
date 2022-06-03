@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'bundler/inline'
+require 'tempfile'
 
 gemfile true, quiet: true do
   source 'https://rubygems.org'
