@@ -6,8 +6,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Jonian Guveli']
   spec.email         = ['jonian@hardpixel.eu']
 
-  spec.summary       = %q{Ruby wrapper for MRML Rust}
-  spec.description   = %q{This project is a reimplementation of the nice MJML markup language in Rust.}
+  spec.summary       = 'Ruby wrapper for MRML Rust'
+  spec.description   = 'Ruby wrapper for MRML, the MJML parser implementation in Rust.'
   spec.homepage      = 'https://github.com/hardpixel/mrml-ruby'
   spec.license       = 'MIT'
 
