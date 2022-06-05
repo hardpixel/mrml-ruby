@@ -6,6 +6,7 @@ edition = "2018"
 
 [dependencies]
 mrml = "1.2.10"
+magnus = "0.3"
 
 [dependencies.serde]
 version = "1.0"

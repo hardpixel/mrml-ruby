@@ -1,66 +1,59 @@
-use std::os::raw::c_char;
-use std::ffi::{CStr, CString};
+use magnus::{
+  class, define_module, function, method,
+  prelude::*, gc::register_mark_object, memoize,
+  Error, ExceptionClass, RClass, RModule
+};
 
-use mrml;
+use mrml::mjml::MJML;
+use mrml::prelude::render::Options;
 
-fn to_string(unsafe_string: *const c_char) -> String {
-  unsafe { CStr::from_ptr(unsafe_string) }.to_str().unwrap().to_string()
+fn mrml_error() -> ExceptionClass {
+  *memoize!(ExceptionClass: {
+    let ex: RClass = class::object().const_get::<_, RModule>("MRML").unwrap().const_get("Error").unwrap();
+    register_mark_object(ex);
+
+    ExceptionClass::from_value(*ex).unwrap()
+  })
 }
 
-fn to_char(string: String) -> *mut c_char {
-  CString::new(string).unwrap().into_raw()
+#[magnus::wrap(class = "MRML::Template", free_immediatly, size)]
+struct Template {
+  res: MJML
 }
 
-fn parse_result(result: Result<String, mrml::prelude::render::Error>) -> *mut c_char {
-  if result.is_err() {
-    to_char(format!("MRML::Error {:?}", result.unwrap_err()))
-  } else {
-    to_char(result.unwrap())
+impl Template {
+  fn new(input: String) -> Result<Self, Error> {
+    match mrml::parse(&input) {
+      Ok(res) => Ok(Self { res }),
+      Err(ex) => Err(Error::new(mrml_error(), ex.to_string()))
+    }
+  }
+
+  fn get_title(&self) -> Option<String> {
+    self.res.get_title()
+  }
+
+  fn get_preview(&self) -> Option<String> {
+    self.res.get_preview()
+  }
+
+  fn to_html(&self) -> Result<String, Error> {
+    match self.res.render(&Options::default()) {
+      Ok(res) => Ok(res),
+      Err(ex) => Err(Error::new(mrml_error(), ex.to_string()))
+    }
   }
 }
 
-fn parse_option(option: Option<String>) -> *mut c_char {
-  to_char(option.unwrap_or("".to_string()))
-}
+#[magnus::init]
+fn init() -> Result<(), Error> {
+  let module = define_module("MRML")?;
+  let class = module.define_class("Template", Default::default())?;
 
-#[no_mangle]
-pub extern "C" fn to_title(input: *const c_char) -> *mut c_char {
-  let root = mrml::parse(&to_string(input));
+  class.define_singleton_method("new", function!(Template::new, 1))?;
+  class.define_method("title", method!(Template::get_title, 0))?;
+  class.define_method("preview", method!(Template::get_preview, 0))?;
+  class.define_method("to_html", method!(Template::to_html, 0))?;
 
-  if root.is_err() {
-    to_char(format!("MRML::Error {:?}", root.unwrap_err()))
-  } else {
-    parse_option(root.unwrap().get_title())
-  }
-}
-
-#[no_mangle]
-pub extern "C" fn to_preview(input: *const c_char) -> *mut c_char {
-  let root = mrml::parse(&to_string(input));
-
-  if root.is_err() {
-    to_char(format!("MRML::Error {:?}", root.unwrap_err()))
-  } else {
-    parse_option(root.unwrap().get_preview())
-  }
-}
-
-#[no_mangle]
-pub extern "C" fn to_html(input: *const c_char) -> *mut c_char {
-  let root = mrml::parse(&to_string(input));
-  let opts = mrml::prelude::render::Options::default();
-
-  if root.is_err() {
-    to_char(format!("MRML::Error {:?}", root.unwrap_err()))
-  } else {
-    parse_result(root.unwrap().render(&opts))
-  }
-}
-
-#[no_mangle]
-pub extern "C" fn free_result(string: *mut c_char) {
-  unsafe {
-    if string.is_null() { return }
-    CString::from_raw(string)
-  };
+  Ok(())
 }
