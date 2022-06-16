@@ -12,6 +12,9 @@ magnus = "0.3"
 version = "1.0"
 features = ["derive"]
 
+[dependencies.serde_json]
+version = "1.0"
+
 [lib]
 name = "mrml"
 crate-type = ["cdylib"]
