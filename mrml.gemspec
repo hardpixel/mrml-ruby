@@ -11,13 +11,13 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'https://github.com/hardpixel/mrml-ruby'
   spec.license       = 'MIT'
 
-  spec.files         = Dir['LICENSE.txt', 'README.md', 'Cargo.toml', '{ext,lib,src}/**/*']
-  spec.extensions    = ['ext/Rakefile']
+  spec.files         = Dir['LICENSE.txt', 'README.md', '{ext,lib}/**/*']
+  spec.extensions    = ['ext/mrml/extconf.rb']
   spec.require_paths = ['lib']
 
-  spec.add_runtime_dependency 'thermite'
+  spec.add_runtime_dependency 'rb_sys'
 
   spec.add_development_dependency 'bundler', '~> 2.0'
   spec.add_development_dependency 'minitest', '~> 5.0'
-  spec.add_development_dependency 'rake', '~> 13.0'
+  spec.add_development_dependency 'rake-compiler', '~> 1.2'
 end

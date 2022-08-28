@@ -1,12 +1,9 @@
-require 'thermite/fiddle'
-
-project_dir = File.dirname(File.dirname(__FILE__))
-
-Thermite::Fiddle.load_module(
-  'Init_mrml',
-  cargo_project_path: project_dir,
-  ruby_project_path: project_dir
-)
+begin
+  RUBY_VERSION =~ /(\d+\.\d+)/
+  require "mrml/#{$1}/mrml"
+rescue LoadError
+  require 'mrml/mrml'
+end
 
 require 'mrml/error'
 require 'mrml/template'

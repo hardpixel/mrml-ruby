@@ -20,7 +20,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        ruby: ['2.7']
+        ruby: ['2.7', '3.1']
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -39,10 +39,4 @@ jobs:
 
       - name: Run tests
         run: |
-          bundle exec rake thermite:build
-          bundle exec rake test
-
-      - name: Package it
-        run: |
-          bundle exec rake thermite:tarball
-          bundle exec rake install
+          bundle exec rake

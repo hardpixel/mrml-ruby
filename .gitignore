@@ -8,10 +8,6 @@
 /tmp/
 Gemfile.lock
 
-# Added by cargo
-
-/target
-Cargo.lock
-
-/lib/*.so
-/mkmf.log
+target
+*.so
+mkmf.log
