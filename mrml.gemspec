@@ -17,6 +17,8 @@ Gem::Specification.new do |spec|
   spec.extensions    = ['ext/mrml/extconf.rb']
   spec.require_paths = ['lib']
 
+  spec.required_ruby_version = '>= 2.6'
+
   spec.add_runtime_dependency 'rb_sys'
 
   spec.add_development_dependency 'bundler', '~> 2.0'
