@@ -32,10 +32,14 @@ class MrmlTest < Minitest::Test
   private
 
   def valid_template
-    @valid_template ||= File.read File.join(__dir__, '..', 'samples/valid.mjml')
+    @valid_template ||= File.read(
+      File.join(__dir__, 'fixtures/valid.mjml')
+    )
   end
 
   def invalid_template
-    @invalid_template ||= File.read File.join(__dir__, '..', 'samples/invalid.mjml')
+    @invalid_template ||= File.read(
+      File.join(__dir__, 'fixtures/invalid.mjml')
+    )
   end
 end

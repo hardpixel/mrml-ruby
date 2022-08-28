@@ -8,7 +8,6 @@ on:
       - 'README.md'
       - 'LICENSE.txt'
       - 'bin/**'
-      - 'samples/**'
   pull_request:
     branches: [master]
 

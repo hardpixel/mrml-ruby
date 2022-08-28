@@ -13,7 +13,9 @@ gemfile true, quiet: true do
   gem 'mjml-rails'
 end
 
-TEMPLATE = File.read File.join(__dir__, '..', 'samples/valid.mjml')
+TEMPLATE = File.read(
+  File.join(__dir__, '..', 'test/fixtures/valid.mjml')
+)
 
 reports = lambda do |x|
   x.report('mrml') do
