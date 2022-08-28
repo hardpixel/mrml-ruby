@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 begin
   RUBY_VERSION =~ /(\d+\.\d+)/
   require "mrml/#{$1}/mrml"
