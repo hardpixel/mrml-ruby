@@ -25,6 +25,18 @@ class MrmlTest < Minitest::Test
     assert result.match?('Hello World')
   end
 
+  def test_that_it_generates_json
+    result = ::MRML.to_json(valid_template)
+    assert_match '"type":"mjml"', result
+  end
+
+  def test_that_it_generates_hash
+    result = ::MRML.to_hash(valid_template)
+
+    assert_kind_of Hash, result
+    assert_equal 'mjml', result['type']
+  end
+
   def test_that_it_raises_an_exception
     assert_raises ::MRML::Error do
       ::MRML.to_html(invalid_template)

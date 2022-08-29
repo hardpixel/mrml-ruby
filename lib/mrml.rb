@@ -25,6 +25,14 @@ module MRML
       call(:to_html, template)
     end
 
+    def to_json(template)
+      call(:to_json, template)
+    end
+
+    def to_hash(template)
+      call(:to_hash, template)
+    end
+
     private
 
     def call(method, template)
