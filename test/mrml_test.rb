@@ -9,20 +9,20 @@ class MrmlTest < Minitest::Test
 
   def test_that_it_generates_title
     result = ::MRML.to_title(valid_template)
-    assert_equal result, 'Newsletter Title'
+    assert_equal 'Newsletter Title', result
   end
 
   def test_that_it_generates_preview
     result = ::MRML.to_preview(valid_template)
-    assert_equal result, 'Newsletter Preview'
+    assert_equal 'Newsletter Preview', result
   end
 
   def test_that_it_generates_html
     result = ::MRML.to_html(valid_template)
 
-    refute result.match?(%r{</?mj.+?>})
-    assert result.match?(%r{</?body>})
-    assert result.match?('Hello World')
+    refute_match %r{</?mj.+?>}, result
+    assert_match %r{</?body>}, result
+    assert_match 'Hello World', result
   end
 
   def test_that_it_generates_json
