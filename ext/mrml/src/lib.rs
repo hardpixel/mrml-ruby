@@ -64,6 +64,12 @@ impl Template {
   }
 }
 
+impl Clone for Template {
+  fn clone(&self) -> Self {
+    Self::new(self.to_mjml()).unwrap()
+  }
+}
+
 #[magnus::init]
 fn init() -> Result<(), Error> {
   let module = define_module("MRML")?;
@@ -78,6 +84,9 @@ fn init() -> Result<(), Error> {
   class.define_method("to_mjml", method!(Template::to_mjml, 0))?;
   class.define_method("to_json", method!(Template::to_json, 0))?;
   class.define_method("to_html", method!(Template::to_html, 0))?;
+
+  class.define_method("clone", method!(Template::clone, 0))?;
+  class.define_method("dup", method!(Template::clone, 0))?;
 
   Ok(())
 }
