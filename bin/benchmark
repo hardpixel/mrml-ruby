@@ -14,17 +14,18 @@ gemfile true, quiet: true do
   gem 'mjml-rails'
 end
 
-TEMPLATE = File.read(
+template = File.read(
   File.join(__dir__, '..', 'test/fixtures/valid.mjml')
 )
 
 reports = lambda do |x|
   x.report('mrml') do
-    MRML.to_html(TEMPLATE)
+    parser = MRML::Template.new(template)
+    parser.to_html
   end
 
   x.report('mjml') do
-    parser = Mjml::Parser.new(TEMPLATE)
+    parser = Mjml::Parser.new(template)
     parser.render
   end
 end
