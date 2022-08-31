@@ -21,7 +21,10 @@ module MRML
     # @raise (see Template#initialize)
 
     def to_html(mjml)
-      call(:to_html, mjml)
+      return if mjml.nil?
+
+      template = Template.new(mjml)
+      template.to_html
     end
 
     # Render template as JSON.
@@ -30,7 +33,10 @@ module MRML
     # @raise (see Template#initialize)
 
     def to_json(mjml)
-      call(:to_json, mjml)
+      return if mjml.nil?
+
+      template = Template.new(mjml)
+      template.to_json
     end
 
     # Render template as Hash.
@@ -39,16 +45,10 @@ module MRML
     # @raise (see Template#initialize)
 
     def to_hash(mjml)
-      call(:to_hash, mjml)
-    end
-
-    private
-
-    def call(method, mjml)
       return if mjml.nil?
 
       template = Template.new(mjml)
-      template.send(method)
+      template.to_hash
     end
   end
 end
