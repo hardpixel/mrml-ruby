@@ -5,9 +5,10 @@ on:
   push:
     branches: [master]
     paths-ignore:
-      - 'README.md'
-      - 'LICENSE.txt'
-      - 'bin/**'
+      - 'ext/**'
+      - 'lib/**'
+      - 'test/**'
+      - '*.gemspec'
   pull_request:
     branches: [master]
 
