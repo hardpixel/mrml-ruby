@@ -1,0 +1,17 @@
+require:
+  - rubocop-performance
+
+AllCops:
+  TargetRubyVersion: 2.6
+  NewCops: enable
+  Include:
+    - lib/**/*.rb
+    - test/**/*.rb
+  Exclude:
+    - bin/**/*
+
+Lint/EmptyClass:
+  Enabled: false
+
+Style/PerlBackrefs:
+  Enabled: false
