@@ -16,39 +16,39 @@ require 'mrml/version'
 module MRML
   class << self
     # Render template as HTML.
-    # @param template [String]
+    # @param mjml [String]
     # @return (see Template#to_html)
     # @raise (see Template#initialize)
 
-    def to_html(template)
-      call(:to_html, template)
+    def to_html(mjml)
+      call(:to_html, mjml)
     end
 
     # Render template as JSON.
-    # @param template [String]
+    # @param mjml [String]
     # @return (see Template#to_json)
     # @raise (see Template#initialize)
 
-    def to_json(template)
-      call(:to_json, template)
+    def to_json(mjml)
+      call(:to_json, mjml)
     end
 
     # Render template as Hash.
-    # @param template [String]
+    # @param mjml [String]
     # @return (see Template#to_hash)
     # @raise (see Template#initialize)
 
-    def to_hash(template)
-      call(:to_hash, template)
+    def to_hash(mjml)
+      call(:to_hash, mjml)
     end
 
     private
 
-    def call(method, template)
-      return if template.nil?
+    def call(method, mjml)
+      return if mjml.nil?
 
-      result = Template.new(template)
-      result.send(method)
+      template = Template.new(mjml)
+      template.send(method)
     end
   end
 end
