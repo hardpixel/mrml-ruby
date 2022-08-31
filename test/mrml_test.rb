@@ -8,13 +8,13 @@ class MrmlTest < Minitest::Test
   end
 
   def test_that_it_generates_title
-    result = ::MRML.to_title(valid_template)
-    assert_equal 'Newsletter Title', result
+    result = ::MRML::Template.new(valid_template)
+    assert_equal 'Newsletter Title', result.title
   end
 
   def test_that_it_generates_preview
-    result = ::MRML.to_preview(valid_template)
-    assert_equal 'Newsletter Preview', result
+    result = ::MRML::Template.new(valid_template)
+    assert_equal 'Newsletter Preview', result.preview
   end
 
   def test_that_it_generates_html
