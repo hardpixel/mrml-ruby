@@ -8,6 +8,7 @@
 /tmp/
 Gemfile.lock
 
+*.gem
 target
 *.so
 mkmf.log
