@@ -13,8 +13,8 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'https://github.com/hardpixel/mrml-ruby'
   spec.license       = 'MIT'
 
-  spec.files         = Dir['LICENSE.txt', 'README.md', '{ext,lib}/**/*']
-  spec.extensions    = ['ext/mrml/extconf.rb']
+  spec.files         = Dir['ext/**/src/*.rs', 'ext/**/Cargo.{lock,toml}', '{ext,lib}/**/*.rb', '*.{md,txt}']
+  spec.extensions    = Dir['ext/**/extconf.rb']
   spec.require_paths = ['lib']
 
   spec.required_ruby_version = '>= 2.6'
