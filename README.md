@@ -27,7 +27,7 @@ Or install it yourself as:
 ```ruby
 require 'mrml'
 
-template = <<-HTML
+mjml = <<-HTML
 <mjml>
   <mj-head>
     <mj-title>Newsletter Title</mj-title>
@@ -43,14 +43,64 @@ template = <<-HTML
 </mjml>
 HTML
 
-# Generate the title from mjml
-MRML.to_title(template)
+# Using module methods
+MRML.to_html(mjml) # Generate html from mjml
+MRML.to_json(mjml) # Generate json from mjml
+MRML.to_hash(mjml) # Generate hash from mjml
 
-# Generate the preview from mjml
-MRML.to_preview(template)
+# Using Template class
+template = MRML::Template.new(mjml)
 
-# Generate the html from mjml
-MRML.to_html(template)
+template.title   # Get template title
+template.preview # Get template preview
+
+template.to_html # Render as html
+template.to_json # Render as json
+template.to_hash # Render as hash
+```
+
+```ruby
+require 'mrml'
+
+json = <<-JSON
+{
+  "type": "mjml",
+  "children": [{
+    "type": "mj-head",
+    "children": [{
+      "type": "mj-title",
+      "children": "Newsletter Title"
+    }, {
+      "type": "mj-preview",
+      "children": "Newsletter Preview"
+    }]
+  }, {
+    "type": "mj-body",
+    "children": [{
+      "type": "mj-section",
+      "children": [{
+        "type": "mj-column",
+        "children": [{
+          "type": "mj-text",
+          "attributes": {
+            "font-size": "20px",
+            "color": "#F45E43",
+            "font-family": "helvetica"
+          },
+          "children": ["Hello World"]
+        }]
+      }]
+    }]
+  }]
+}
+JSON
+
+# Create Template from JSON
+template = MRML::Template.from_json(json)
+
+template.to_html # Render as html
+template.to_json # Render as json
+template.to_hash # Render as hash
 ```
 
 ## Development
@@ -62,7 +112,6 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/hardpixel/mrml-ruby.
-
 
 ## License
 
