@@ -1,7 +1,7 @@
 use magnus::{
   class, define_module, function, method,
   prelude::*, gc::register_mark_object, memoize,
-  Error, ExceptionClass, RClass, RModule
+  Error, ExceptionClass, RModule
 };
 
 use mrml::mjml::MJML;
@@ -10,14 +10,13 @@ use mrml::prelude::render::Options;
 
 fn mrml_error() -> ExceptionClass {
   *memoize!(ExceptionClass: {
-    let ex: RClass = class::object().const_get::<_, RModule>("MRML").unwrap().const_get("Error").unwrap();
+    let ex = class::object().const_get::<_, RModule>("MRML").unwrap().const_get("Error").unwrap();
     register_mark_object(ex);
-
-    ExceptionClass::from_value(*ex).unwrap()
+    ex
   })
 }
 
-#[magnus::wrap(class = "MRML::Template", free_immediatly, size)]
+#[magnus::wrap(class = "MRML::Template", free_immediately, size)]
 struct Template {
   res: MJML
 }
