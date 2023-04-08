@@ -55,6 +55,7 @@ template.title   # Get template title
 template.preview # Get template preview
 
 template.to_html # Render as html
+template.to_mjml # Render as mjml
 template.to_json # Render as json
 template.to_hash # Render as hash
 ```
@@ -99,6 +100,7 @@ JSON
 template = MRML::Template.from_json(json)
 
 template.to_html # Render as html
+template.to_mjml # Render as mjml
 template.to_json # Render as json
 template.to_hash # Render as hash
 ```
