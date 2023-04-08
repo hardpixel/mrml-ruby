@@ -1,0 +1,30 @@
+{
+  "type": "mjml",
+  "children": [{
+    "type": "mj-head",
+    "children": [{
+      "type": "mj-title",
+      "children": "Newsletter Title"
+    }, {
+      "type": "mj-preview",
+      "children": "Newsletter Preview"
+    }]
+  }, {
+    "type": "mj-body",
+    "children": [{
+      "type": "mj-section",
+      "children": [{
+        "type": "mj-column",
+        "children": [{
+          "type": "mj-text",
+          "attributes": {
+            "font-size": "20px",
+            "color": "#F45E43",
+            "font-family": "helvetica"
+          },
+          "children": ["Hello World"]
+        }]
+      }]
+    }]
+  }]
+}

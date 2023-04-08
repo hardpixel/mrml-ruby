@@ -7,6 +7,16 @@ class MrmlTest < Minitest::Test
     refute_nil ::MRML::VERSION
   end
 
+  def test_that_it_loads_json
+    result = ::MRML::Template.from_json(json_template)
+    assert_instance_of ::MRML::Template, result
+  end
+
+  def test_that_it_loads_hash
+    result = ::MRML::Template.from_hash(hash_template)
+    assert_instance_of ::MRML::Template, result
+  end
+
   def test_that_it_generates_title
     result = ::MRML::Template.new(valid_template)
     assert_equal 'Newsletter Title', result.title
@@ -37,6 +47,11 @@ class MrmlTest < Minitest::Test
     assert_equal 'mjml', result['type']
   end
 
+  def test_that_it_generates_mjml
+    result = ::MRML::Template.from_json(json_template)
+    assert_match %r{</?mj.+?>}, result.to_mjml
+  end
+
   def test_that_it_raises_an_exception
     assert_raises ::MRML::Error do
       ::MRML.to_html(invalid_template)
@@ -55,5 +70,15 @@ class MrmlTest < Minitest::Test
     @invalid_template ||= File.read(
       File.join(__dir__, 'fixtures/invalid.mjml')
     )
+  end
+
+  def json_template
+    @json_template ||= File.read(
+      File.join(__dir__, 'fixtures/value.json')
+    )
+  end
+
+  def hash_template
+    @hash_template ||= JSON.parse(json_template)
   end
 end
