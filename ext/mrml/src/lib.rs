@@ -72,7 +72,7 @@ impl Clone for Template {
 #[magnus::init]
 fn init() -> Result<(), Error> {
   let module = define_module("MRML")?;
-  let class = module.define_class("Template", Default::default())?;
+  let class = module.define_class("Template", class::object())?;
 
   class.define_singleton_method("new", function!(Template::new, 1))?;
   class.define_singleton_method("from_json", function!(Template::from_json, 1))?;
