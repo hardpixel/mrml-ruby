@@ -1,6 +1,6 @@
 # MRML Ruby
 
-Ruby wrapper for [MRML](https://github.com/jdrouet/mrml), the [MJML](https://mjml.io) markup language implementation in Rust. Rust must be available on your system to install this gem.
+Ruby wrapper for [MRML](https://github.com/jolimail/mrml-core), the [MJML](https://mjml.io) markup language implementation in Rust. Rust must be available on your system to install this gem.
 
 [![Gem Version](https://badge.fury.io/rb/mrml.svg)](https://badge.fury.io/rb/mrml)
 [![Build](https://github.com/hardpixel/mrml-ruby/actions/workflows/build.yml/badge.svg)](https://github.com/hardpixel/mrml-ruby/actions/workflows/build.yml)
