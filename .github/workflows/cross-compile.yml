@@ -38,7 +38,7 @@
           id: cross-gem
           with:
             platform: ${{ matrix.platform }}
-            ruby-versions: ${{ join(fromJSON(needs.ci-data.outputs.result).stable-ruby-versions, ',') }}
+            ruby-versions: 2.6,2.7,${{ join(fromJSON(needs.ci-data.outputs.result).stable-ruby-versions) }}
 
         - uses: actions/upload-artifact@v3
           with:
