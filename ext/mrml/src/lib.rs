@@ -16,6 +16,12 @@ fn mrml_error() -> ExceptionClass {
   })
 }
 
+macro_rules! error {
+  ($ex:ident) => {
+    Error::new(mrml_error(), $ex.to_string())
+  };
+}
+
 #[magnus::wrap(class = "MRML::Template", free_immediately, size)]
 struct Template {
   res: MJML
@@ -25,14 +31,14 @@ impl Template {
   fn new(input: String) -> Result<Self, Error> {
     match mrml::parse(&input) {
       Ok(res) => Ok(Self { res }),
-      Err(ex) => Err(Error::new(mrml_error(), ex.to_string()))
+      Err(ex) => Err(error!(ex))
     }
   }
 
   fn from_json(input: String) -> Result<Self, Error> {
     match serde_json::from_str::<MJML>(&input) {
       Ok(res) => Ok(Self { res }),
-      Err(ex) => Err(Error::new(mrml_error(), ex.to_string()))
+      Err(ex) => Err(error!(ex))
     }
   }
 
@@ -51,14 +57,14 @@ impl Template {
   fn to_json(&self) -> Result<String, Error> {
     match serde_json::to_string(&self.res) {
       Ok(res) => Ok(res),
-      Err(ex) => Err(Error::new(mrml_error(), ex.to_string()))
+      Err(ex) => Err(error!(ex))
     }
   }
 
   fn to_html(&self) -> Result<String, Error> {
     match self.res.render(&Options::default()) {
       Ok(res) => Ok(res),
-      Err(ex) => Err(Error::new(mrml_error(), ex.to_string()))
+      Err(ex) => Err(error!(ex))
     }
   }
 }
