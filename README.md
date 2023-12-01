@@ -105,6 +105,33 @@ template.to_json # Render as json
 template.to_hash # Render as hash
 ```
 
+## Benchmark
+
+```
+Warming up --------------------------------------
+                mrml     3.069k i/100ms
+                mjml     1.000  i/100ms
+Calculating -------------------------------------
+                mrml     32.537k (±16.1%) i/s -    156.519k in   5.029759s
+                mjml      1.895  (± 0.0%) i/s -     10.000  in   5.283579s
+
+Comparison:
+                mrml:    32537.2 i/s
+                mjml:        1.9 i/s - 17169.16x  slower
+
+Calculating -------------------------------------
+                mrml     3.166k memsize (     0.000  retained)
+                         2.000  objects (     0.000  retained)
+                         1.000  strings (     0.000  retained)
+                mjml    21.253k memsize (     1.490k retained)
+                       107.000  objects (    15.000  retained)
+                        20.000  strings (    11.000  retained)
+
+Comparison:
+                mrml:       3166 allocated
+                mjml:      21253 allocated - 6.71x more
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
