@@ -5,7 +5,7 @@ authors = ["Jonian Guveli <jonian@hardpixel.eu>"]
 edition = "2018"
 
 [dependencies]
-mrml = "1.2"
+mrml = "3.0"
 magnus = "0.5"
 
 [dependencies.serde]

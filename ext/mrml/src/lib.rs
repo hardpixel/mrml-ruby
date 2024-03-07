@@ -4,9 +4,9 @@ use magnus::{
   Error, ExceptionClass, RModule
 };
 
-use mrml::mjml::MJML;
+use mrml::mjml::Mjml;
 use mrml::prelude::print::Print;
-use mrml::prelude::render::Options;
+use mrml::prelude::render::RenderOptions;
 
 fn mrml_error() -> ExceptionClass {
   *memoize!(ExceptionClass: {
@@ -24,7 +24,7 @@ macro_rules! error {
 
 #[magnus::wrap(class = "MRML::Template", free_immediately, size)]
 struct Template {
-  res: MJML
+  res: Mjml
 }
 
 impl Template {
@@ -36,7 +36,7 @@ impl Template {
   }
 
   fn from_json(input: String) -> Result<Self, Error> {
-    match serde_json::from_str::<MJML>(&input) {
+    match serde_json::from_str::<Mjml>(&input) {
       Ok(res) => Ok(Self { res }),
       Err(ex) => Err(error!(ex))
     }
@@ -62,7 +62,7 @@ impl Template {
   }
 
   fn to_html(&self) -> Result<String, Error> {
-    match self.res.render(&Options::default()) {
+    match self.res.render(&RenderOptions::default()) {
       Ok(res) => Ok(res),
       Err(ex) => Err(error!(ex))
     }
