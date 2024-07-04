@@ -44,3 +44,12 @@ jobs:
         with:
           name: mrml-ruby-${{ matrix.platform }}
           path: ${{ steps.cross-gem.outputs.gem-path }}
+  merge-artifacts:
+    runs-on: ubuntu-latest
+    needs: cross-gem
+    steps:
+      - name: Merge artifacts
+        uses: actions/upload-artifact/merge@v4
+        with:
+          name: cross-gem
+          pattern: mrml-ruby-*
