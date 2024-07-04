@@ -237,16 +237,16 @@ name = "mrml"
 version = "0.1.0"
 dependencies = [
  "magnus",
- "mrml 3.1.4",
+ "mrml 3.1.5",
  "serde",
  "serde_json",
 ]
 
 [[package]]
 name = "mrml"
-version = "3.1.4"
+version = "3.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "398abc648681dde5791dc51172e52d95156ec579d2e55a128606d7819d2a471e"
+checksum = "ed4c5f1e193a156a026c7e899b45b70b1499d887260f66ee40de60be0619e103"
 dependencies = [
  "indexmap",
  "itertools",
