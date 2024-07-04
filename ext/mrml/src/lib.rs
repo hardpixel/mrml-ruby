@@ -5,7 +5,7 @@ use magnus::{
 };
 
 use mrml::mjml::Mjml;
-use mrml::prelude::print::Print;
+use mrml::prelude::print::Printable;
 use mrml::prelude::render::RenderOptions;
 
 fn mrml_error() -> ExceptionClass {
@@ -51,7 +51,7 @@ impl Template {
   }
 
   fn to_mjml(&self) -> String {
-    self.res.dense_print()
+    self.res.print_dense().unwrap()
   }
 
   fn to_json(&self) -> Result<String, Error> {
