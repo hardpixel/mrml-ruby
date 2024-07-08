@@ -1,6 +1,5 @@
 use magnus::{
-  class, define_module, function, method,
-  prelude::*, gc::register_mark_object, memoize,
+  function, method, prelude::*, value::Lazy, Ruby,
   Error, ExceptionClass, RModule
 };
 
@@ -8,12 +7,14 @@ use mrml::mjml::Mjml;
 use mrml::prelude::print::Printable;
 use mrml::prelude::render::RenderOptions;
 
+static MODULE: Lazy<RModule> =
+  Lazy::new(|ruby| ruby.class_object().const_get("MRML").unwrap());
+
+static ERROR: Lazy<ExceptionClass> =
+  Lazy::new(|ruby| ruby.get_inner(&MODULE).const_get("Error").unwrap());
+
 fn mrml_error() -> ExceptionClass {
-  *memoize!(ExceptionClass: {
-    let ex = class::object().const_get::<_, RModule>("MRML").unwrap().const_get("Error").unwrap();
-    register_mark_object(ex);
-    ex
-  })
+  Ruby::get().unwrap().get_inner(&ERROR)
 }
 
 macro_rules! error {
@@ -76,9 +77,9 @@ impl Clone for Template {
 }
 
 #[magnus::init]
-fn init() -> Result<(), Error> {
-  let module = define_module("MRML")?;
-  let class = module.define_class("Template", class::object())?;
+fn init(ruby: &Ruby) -> Result<(), Error> {
+  let module = ruby.define_module("MRML")?;
+  let class = module.define_class("Template", ruby.class_object())?;
 
   class.define_singleton_method("new", function!(Template::new, 1))?;
   class.define_singleton_method("from_json", function!(Template::from_json, 1))?;
