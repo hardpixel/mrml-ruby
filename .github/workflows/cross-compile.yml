@@ -38,7 +38,7 @@ jobs:
         id: cross-gem
         with:
           platform: ${{ matrix.platform }}
-          ruby-versions: 2.6,2.7,3.0${{ join(fromJSON(needs.ci-data.outputs.result).stable-ruby-versions) }}
+          ruby-versions: 2.6,2.7,3.0,${{ join(fromJSON(needs.ci-data.outputs.result).stable-ruby-versions) }}
 
       - uses: actions/upload-artifact@v4
         with:
