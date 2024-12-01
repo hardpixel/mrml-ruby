@@ -7,6 +7,7 @@ edition = "2018"
 [dependencies]
 mrml = "4.0"
 magnus = "0.5"
+rb-sys = { version = "*", features = ["stable-api-compiled-fallback"] }
 
 [dependencies.serde]
 version = "1.0"
