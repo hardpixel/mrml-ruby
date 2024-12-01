@@ -277,6 +277,7 @@ version = "0.1.0"
 dependencies = [
  "magnus",
  "mrml 4.0.1",
+ "rb-sys",
  "serde",
  "serde_json",
 ]
