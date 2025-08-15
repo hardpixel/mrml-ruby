@@ -108,27 +108,27 @@ template.to_hash # Render as hash
 
 ```
 Warming up --------------------------------------
-                mrml     3.069k i/100ms
+                mrml     3.071k i/100ms
                 mjml     1.000  i/100ms
 Calculating -------------------------------------
-                mrml     32.537k (±16.1%) i/s -    156.519k in   5.029759s
-                mjml      1.895  (± 0.0%) i/s -     10.000  in   5.283579s
+                mrml     40.927k (±14.2%) i/s ( 24.43 μs/i) - 199.615k in 5.058805s
+                mjml      1.774  (± 0.0%) i/s (563.81 ms/i) -   9.000  in 5.085477s
 
 Comparison:
-                mrml:    32537.2 i/s
-                mjml:        1.9 i/s - 17169.16x  slower
+                mrml:    40927.2 i/s
+                mjml:        1.8 i/s - 23075.08x  slower
 
 Calculating -------------------------------------
-                mrml     3.166k memsize (     0.000  retained)
+                mrml     3.109k memsize (     0.000  retained)
                          2.000  objects (     0.000  retained)
                          1.000  strings (     0.000  retained)
-                mjml    21.253k memsize (     1.490k retained)
-                       107.000  objects (    15.000  retained)
-                        20.000  strings (    11.000  retained)
+                mjml    24.183k memsize (    40.000  retained)
+                       110.000  objects (     1.000  retained)
+                        28.000  strings (     1.000  retained)
 
 Comparison:
-                mrml:       3166 allocated
-                mjml:      21253 allocated - 6.71x more
+                mrml:       3109 allocated
+                mjml:      24183 allocated - 7.78x more
 ```
 
 ## Development

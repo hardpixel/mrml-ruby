@@ -25,7 +25,7 @@ reports = lambda do |x|
   end
 
   x.report('mjml') do
-    parser = Mjml::Parser.new(template)
+    parser = Mjml::Parser.new(nil, template)
     parser.render
   end
 end
