@@ -31,7 +31,7 @@ struct Template {
 impl Template {
   fn new(input: String) -> Result<Self, Error> {
     match mrml::parse(&input) {
-      Ok(res) => Ok(Self { res }),
+      Ok(output) => Ok(Self { res: output.element }),
       Err(ex) => Err(error!(ex))
     }
   }
