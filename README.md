@@ -4,7 +4,6 @@ Ruby wrapper for [MRML](https://github.com/jdrouet/mrml), the [MJML](https://mjm
 
 [![Gem Version](https://badge.fury.io/rb/mrml.svg)](https://badge.fury.io/rb/mrml)
 [![Build](https://github.com/hardpixel/mrml-ruby/actions/workflows/build.yml/badge.svg)](https://github.com/hardpixel/mrml-ruby/actions/workflows/build.yml)
-[![Maintainability](https://api.codeclimate.com/v1/badges/7e307214d3c2e4d2056d/maintainability)](https://codeclimate.com/github/hardpixel/mrml-ruby/maintainability)
 
 ## Installation
 
