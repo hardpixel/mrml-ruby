@@ -2,7 +2,6 @@
 name: Cross Compile
 
 on:
-  workflow_dispatch:
   push:
     tags:
       - "v*"
@@ -17,8 +16,7 @@ jobs:
       - uses: oxidize-rb/actions/fetch-ci-data@v1
         id: fetch
         with:
-          supported-ruby-platforms: |
-            exclude: [arm-linux]
+          supported-ruby-platforms: true
           stable-ruby-versions: |
             exclude: [head]
   cross-gem:
