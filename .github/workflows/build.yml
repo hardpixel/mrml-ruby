@@ -20,7 +20,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        ruby: ['2.7', '3.2', '3.3', '3.4']
+        ruby: ['2.7', '3.2', '3.3', '3.4', '4.0']
     runs-on: ${{ matrix.os }}
 
     steps:
