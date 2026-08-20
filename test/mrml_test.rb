@@ -35,6 +35,34 @@ class MrmlTest < Minitest::Test
     assert_match 'Hello World', result
   end
 
+  def test_that_it_inlines_styles
+    result = ::MRML.to_html(inline_template)
+
+    assert_match %r{<td class="highlight"[^>]*style="[^"]*color: ?#F45E43}, result
+    refute_match %r{<style[^>]*>[^<]*\.highlight}, result
+  end
+
+  def test_that_it_keeps_non_inline_styles
+    result = ::MRML.to_html(inline_template)
+
+    assert_match %r{<style[^>]*>[^<]*\.footer}, result
+    refute_match %r{<td class="footer"[^>]*style="[^"]*color: ?#888888}, result
+  end
+
+  def test_that_it_inlines_styles_after_clone
+    template = ::MRML::Template.new(inline_template)
+
+    assert_equal template.to_html, template.clone.to_html
+    assert_equal template.to_html, template.dup.to_html
+  end
+
+  def test_that_it_inlines_styles_from_json
+    template = ::MRML::Template.new(inline_template)
+    result = ::MRML::Template.from_json(template.to_json)
+
+    assert_equal template.to_html, result.to_html
+  end
+
   def test_that_it_generates_json
     result = ::MRML.to_json(valid_template)
     assert_match '"type":"mjml"', result
@@ -69,6 +97,12 @@ class MrmlTest < Minitest::Test
   def invalid_template
     @invalid_template ||= File.read(
       File.join(__dir__, 'fixtures/invalid.mjml')
+    )
+  end
+
+  def inline_template
+    @inline_template ||= File.read(
+      File.join(__dir__, 'fixtures/inline.mjml')
     )
   end
 
