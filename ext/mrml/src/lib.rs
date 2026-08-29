@@ -72,7 +72,7 @@ impl Template {
 
 impl Clone for Template {
   fn clone(&self) -> Self {
-    Self::new(self.to_mjml()).unwrap()
+    Self { res: self.res.clone() }
   }
 }
 

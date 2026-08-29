@@ -104,6 +104,45 @@ template.to_json # Render as json
 template.to_hash # Render as hash
 ```
 
+### Inline styles
+
+CSS declared in an `mj-style` tag with the `inline` attribute is merged into the
+`style` attribute of the elements it matches, which is what most email clients
+need. Styles in a plain `mj-style` tag are left in a `<style>` tag in the head.
+
+```ruby
+require 'mrml'
+
+mjml = <<-HTML
+<mjml>
+  <mj-head>
+    <mj-style inline="inline">
+      .highlight { color: #F45E43; }
+    </mj-style>
+    <mj-style>
+      .footer { color: #888888; }
+    </mj-style>
+  </mj-head>
+  <mj-body>
+    <mj-section>
+      <mj-column>
+        <mj-text css-class="highlight">Hello World</mj-text>
+        <mj-text css-class="footer">Goodbye World</mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>
+HTML
+
+MRML.to_html(mjml)
+# => <td class="highlight" ... style="color: #F45E43;...">Hello World</td>
+# => <style type="text/css">.footer { color: #888888; }</style>
+```
+
+Note that `to_mjml` does not currently round-trip the `inline` attribute, so
+re-parsing the output of `to_mjml` loses style inlining. `to_json`/`to_hash` and
+`clone`/`dup` preserve it.
+
 ## Benchmark
 
 ```

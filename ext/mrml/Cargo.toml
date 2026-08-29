@@ -5,7 +5,7 @@ authors = ["Jonian Guveli <jonian@hardpixel.eu>"]
 edition = "2018"
 
 [dependencies]
-mrml = "5.1"
+mrml = { version = "6.0.1", features = ["css-inline"] }
 magnus = "0.8"
 
 [dependencies.serde]
