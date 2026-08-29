@@ -80,6 +80,26 @@ class MrmlTest < Minitest::Test
     assert_match %r{</?mj.+?>}, result.to_mjml
   end
 
+  def test_that_it_clones_the_template
+    template = ::MRML::Template.new(valid_template)
+    clone = template.clone
+    dup = template.dup
+    
+    assert_instance_of ::MRML::Template, clone
+    assert_instance_of ::MRML::Template, dup
+    
+    refute_same template, clone
+    refute_same template, dup
+    
+    assert_equal template.to_html, clone.to_html
+    assert_equal template.to_json, clone.to_json
+    assert_equal template.to_mjml, clone.to_mjml
+    
+    assert_equal template.to_html, dup.to_html
+    assert_equal template.to_json, dup.to_json
+    assert_equal template.to_mjml, dup.to_mjml
+  end
+
   def test_that_it_raises_an_exception
     assert_raises ::MRML::Error do
       ::MRML.to_html(invalid_template)
