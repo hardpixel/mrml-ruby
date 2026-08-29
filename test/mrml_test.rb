@@ -35,6 +35,23 @@ class MrmlTest < Minitest::Test
     assert_match 'Hello World', result
   end
 
+  def test_that_it_generates_json
+    result = ::MRML.to_json(valid_template)
+    assert_match '"type":"mjml"', result
+  end
+
+  def test_that_it_generates_hash
+    result = ::MRML.to_hash(valid_template)
+
+    assert_kind_of Hash, result
+    assert_equal 'mjml', result['type']
+  end
+
+  def test_that_it_generates_mjml
+    result = ::MRML::Template.from_json(json_template)
+    assert_match %r{</?mj.+?>}, result.to_mjml
+  end
+
   def test_that_it_inlines_styles
     result = ::MRML.to_html(inline_template)
 
@@ -61,23 +78,6 @@ class MrmlTest < Minitest::Test
     result = ::MRML::Template.from_json(template.to_json)
 
     assert_equal template.to_html, result.to_html
-  end
-
-  def test_that_it_generates_json
-    result = ::MRML.to_json(valid_template)
-    assert_match '"type":"mjml"', result
-  end
-
-  def test_that_it_generates_hash
-    result = ::MRML.to_hash(valid_template)
-
-    assert_kind_of Hash, result
-    assert_equal 'mjml', result['type']
-  end
-
-  def test_that_it_generates_mjml
-    result = ::MRML::Template.from_json(json_template)
-    assert_match %r{</?mj.+?>}, result.to_mjml
   end
 
   def test_that_it_clones_the_template
